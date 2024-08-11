@@ -58,7 +58,8 @@ body {
 .container__content {
     border-radius: 2rem 2rem 0 0;
     background-color: #545454;
-    height: 100dvh;
+    min-height: 100dvh;
+    height: auto;
 }
 
 .presentation {
