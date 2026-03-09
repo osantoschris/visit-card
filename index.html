@@ -8,10 +8,31 @@
 </head>
 <body>
     <div class="container">
-        <!-- <h3>Clary<span>um</span></h3> -->
-        <h3 class="logo">Claryum</h3>
+        <h1 class="logo">Claryum</h1>
         <p class="slogan">Clareza para decisões que importam.</p>
-        <p class="message">Estamos construindo um novo site para vocês. Em breve nos vemos por aqui.</p>
+        <p class="message">Estamos construindo um novo site para você. Em breve nos vemos por aqui.</p>
+
+        <h3 class="form-title">Enquanto terminamos as coisas por aqui, que tal entrar em contato para mostrarmos nossos serviços?</h3>
+        
+        <form name="contact" method="POST" class="claryum-form" data-netlify="true">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Como podemos te ajudar agora?</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Enviar</button>
+        </form>
+
         <footer>&copy; Since 2026</footer>
     </div>
 </body>

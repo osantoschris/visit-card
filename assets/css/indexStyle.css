@@ -1,81 +1,153 @@
 :root {
     --primary-color: #002B5B; /* Azul Corporativo */
     --secondary-color: #00E5FF; /* Ciano Moderno para Detalhes */
-    --text-color: #333;
+    --text-color: #333333;
     --bg-light: #F4F7F9;
+    --border-color: #E2E8F0;
+    --white: #FFFFFF;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', 'Trebuchet MS', sans-serif;
+    font-family: 'Inter', 'Segoe UI', 'Trebuchet MS', sans-serif;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh; /* Permite que a tela cresça se necessário no celular */
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--bg-light); /* Aplicando o fundo claro */
+    color: var(--text-color);
 }
 
 .container {
-    width: 95%;
-    height: 80%;
+    width: 90%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.container > h3 {
-    /* width: 100%; */
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-    text-transform: uppercase;
-}
-.container > h3 span {
-    color: var(--secondary-color);
+    padding: 40px 0;
+    text-align: center;
 }
 
-/* Logotipo */
+/* Logotipo com efeito de duas cores */
 .logo {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 3rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+    font-size: 3.5rem;
+    text-transform: uppercase;
     font-weight: bold;
+    margin-bottom: 5px;
 
-    /* Cria efeito de duas cores */
-    background: linear-gradient(to right, #333 67%, var(--secondary-color) 67%);
-
-    /* Fundo aparece apenas dentro das letras */
+    /* Azul na esquerda, Ciano na direita (no 'um') */
+    background: linear-gradient(to right, var(--primary-color) 67%, var(--secondary-color) 67%);
     -webkit-background-clip: text;
     background-clip: text;
-
-    /* Deixa letra transparente para aprecer o fundo */
     -webkit-text-fill-color: transparent;
     color: transparent;
 }
 
-/* Slogan */
+/* Textos de introdução */
 .slogan {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
 }
 
-/* Mensagem */
 .message {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 1rem;
-    padding-top: 2rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Título do formulário */
+.form-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    max-width: 600px;
+}
+
+/* Estilos do Formulário */
+.claryum-form {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.claryum-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 14px;
+}
+
+.claryum-form input[type="text"],
+.claryum-form input[type="email"],
+.claryum-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito ao clicar no campo */
+.claryum-form input[type="text"]:focus,
+.claryum-form input[type="email"]:focus,
+.claryum-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.15);
+}
+
+.claryum-form textarea {
+    resize: vertical;
+}
+
+/* Botão com gradiente */
+.submit-btn {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    border: none;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: opacity 0.3s ease, transform 0.1s ease;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* Rodapé */
+footer {
+    margin-top: 50px;
+    font-size: 0.85rem;
+    color: #888;
 }
