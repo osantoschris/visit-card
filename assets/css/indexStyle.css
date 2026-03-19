@@ -16,12 +16,9 @@
 
 body {
     width: 100%;
-    min-height: 100vh; /* Permite que a tela cresça se necessário no celular */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bg-light); /* Aplicando o fundo claro */
+    background-color: var(--white);
     color: var(--text-color);
+    line-height: 1.6;
 }
 
 .container {
@@ -41,7 +38,8 @@ body {
     font-size: 3.5rem;
     text-transform: uppercase;
     font-weight: bold;
-    margin-bottom: 5px;
+    text-decoration: none;
+    font-size: 2rem; /* Adaptado para o tamanho no menu */
 
     /* Azul na esquerda, Ciano na direita (no 'um') */
     background: linear-gradient(to right, var(--primary-color) 67%, var(--secondary-color) 67%);
@@ -145,9 +143,549 @@ body {
     transform: scale(0.98);
 }
 
-/* Rodapé */
-footer {
-    margin-top: 50px;
+/* --- Novos Estilos do Site Institucional --- */
+
+/* Header & Navegação */
+.header {
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
+/* Botão de Tradução */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lang-toggle {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
     font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.lang-toggle:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Menu Mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 43, 91, 0.9), rgba(0, 43, 91, 0.9));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-tag {
+    display: inline-block;
+    background-color: rgba(0, 229, 255, 0.15); /* Fundo ciano translúcido */
+    color: var(--secondary-color);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: var(--bg-light);
+    max-width: 700px;
+    margin-inline: auto;
+}
+
+.btn-cta {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.btn-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Seções Gerais */
+.section {
+    padding: 100px 20px;
+}
+
+.bg-light-section {
+    background-color: var(--bg-light);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+.section-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Grid de Serviços */
+.container-full {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-bottom-color: var(--secondary-color);
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+/* --- Carrossel de Portfólio --- */
+.carousel-container {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background-color: var(--white);
+    margin-top: 20px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.slide-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.slide-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.slide-content {
+    flex: 1;
+    padding: 40px;
+    text-align: left;
+}
+
+.slide-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+/* Centralizador de Layout e Formulário */
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* --- Nova Seção de Contato Dividida --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.contact-info {
+    text-align: left;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.contact-text {
+    font-size: 1.15rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: var(--white);
+}
+
+.contact-card:hover {
+    border-color: rgba(0, 229, 255, 0.4);
+    background-color: rgba(0, 229, 255, 0.05);
+}
+
+.contact-icon {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(0, 43, 91, 0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    transition: background-color 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+    background-color: rgba(0, 43, 91, 0.15);
+}
+
+.contact-card-text .label {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 2px;
+}
+
+.contact-card-text .value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.contact-form-wrapper {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid var(--border-color);
+}
+
+/* Sobrescrevendo max-width do form padrão para se adaptar ao card */
+.contact-form-wrapper .claryum-form {
+    max-width: 100%;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+.flex-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-footer-text {
+    text-align: center;
+    font-size: 0.8rem;
     color: #888;
+    margin-top: 15px;
+}
+
+/* --- Animações de Scroll (Reveal) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Rodapé */
+.footer-site {
+    background-color: var(--primary-color);
+    color: var(--bg-light);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9rem;
+}
+
+/* --- Aviso de Cookies (LGPD) --- */
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 9999;
+    width: 90%;
+    max-width: 800px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+}
+
+.cookie-banner.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -10px);
+}
+
+.cookie-banner p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+    flex: 1;
+}
+
+.cookie-btn {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.cookie-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* --- Alerta Flutuante de Sucesso (Toast) --- */
+.toast-alert {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background-color: #10B981; /* Verde Sucesso */
+    color: var(--white);
+    padding: 16px 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transform: translateX(150%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-alert.show {
+    transform: translateX(0);
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Escondido por padrão no mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Ajuste do Carrossel para Celular */
+    .carousel-slide {
+        flex-direction: column;
+    }
+    .slide-image {
+        max-width: 100%;
+    }
+    .slide-content {
+        padding: 30px 20px;
+        text-align: center;
+    }
+    .carousel-btn {
+        top: 25%; /* Centraliza o botão na imagem ao invés do card inteiro */
+    }
+
+    /* Ajuste do Contato para Celular */
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Ajuste de Cookies para Celular */
+    .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .cookie-btn {
+        width: 100%;
+    }
+
+    /* Ajuste do Toast para Celular */
+    .toast-alert {
+        top: 20px;
+        right: 10px;
+        left: 10px;
+        justify-content: center;
+    }
 }
