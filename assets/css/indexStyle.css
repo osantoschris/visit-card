@@ -334,6 +334,101 @@ body {
     font-size: 1.4rem;
 }
 
+/* --- Pacotes de Serviços --- */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.package-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.package-card.highlight {
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 8px 20px rgba(0, 229, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.package-card.highlight:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.package-card h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.package-desc {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    min-height: 45px;
+}
+
+.package-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.package-features li {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.package-features li::before {
+    content: '✓';
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.package-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    text-align: center;
+}
+
 /* --- Carrossel de Portfólio --- */
 .carousel-container {
     width: 100%;
@@ -687,5 +782,14 @@ body {
         right: 10px;
         left: 10px;
         justify-content: center;
+    }
+
+    /* Ajuste dos Pacotes para Celular */
+    .package-card.highlight {
+        transform: scale(1);
+        margin-top: 15px;
+    }
+    .package-card.highlight:hover {
+        transform: translateY(-5px);
     }
 }
