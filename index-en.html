@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,16 +39,9 @@
                         'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #818CF833 0deg, #38BDF833 180deg, #818CF833 360deg)',
                     },
                     animation: {
-                        'blob': 'blob 7s infinite',
                         'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                     },
                     keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
@@ -65,41 +58,56 @@
             background-color: #0B0F19;
             color: #F9FAFB;
             overflow-x: hidden;
+            caret-color: #38BDF8;
+        }
+
+        ::selection {
+            background-color: rgba(56, 189, 248, 0.25);
+            color: #FFFFFF;
+        }
+
+        :focus-visible {
+            outline: 2px solid #38BDF8;
+            outline-offset: 2px;
+        }
+
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
         }
 
         .glass {
-            background: rgba(17, 24, 39, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .glass-card {
-            background: linear-gradient(145deg, rgba(31, 41, 55, 0.4) 0%, rgba(17, 24, 39, 0.4) 100%);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(160deg, rgba(26, 34, 53, 0.5) 0%, rgba(15, 23, 42, 0.6) 100%);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         .text-gradient {
-            background: linear-gradient(to right, #38BDF8, #818CF8);
+            background: linear-gradient(135deg, #F8FAFC 20%, #38BDF8 70%, #818CF8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hover-lift {
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
         }
         .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.12);
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
@@ -113,41 +121,62 @@
             background: #0B0F19;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1F2937;
+            background: #1E293B;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #374151;
+            background: #334155;
         }
 
         .spinner {
-            border: 3px solid rgba(255,255,255,0.1);
-            width: 20px;
-            height: 20px;
+            border: 2.5px solid rgba(255,255,255,0.15);
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             border-left-color: #38BDF8;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
             display: none;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .btn-loading .spinner { display: inline-block; }
         .btn-loading .btn-text, .btn-loading svg:not(.spinner) { display: none; }
+
+        /* Accessibility: Respect Reduced Motion Preferences */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .hover-lift:hover {
+                transform: none !important;
+            }
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-neon-blue selection:text-dark-900">
+<body class="antialiased selection:bg-cyan-500/20 selection:text-white">
 
-    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neon-blue/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob"></div>
-        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-neon-purple/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] bg-neon-blue/10 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob" style="animation-delay: 4s;"></div>
+    <!-- Subtle Architectural Background Lighting (No flickering/pulsing orbs) -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none" aria-hidden="true">
+        <div class="absolute top-[-10%] left-[15%] w-[650px] h-[500px] bg-gradient-to-br from-cyan-500/10 via-indigo-500/5 to-transparent rounded-full filter blur-[130px] opacity-70"></div>
+        <div class="absolute top-[35%] right-[-8%] w-[550px] h-[450px] bg-gradient-to-bl from-indigo-500/10 via-cyan-500/5 to-transparent rounded-full filter blur-[140px] opacity-60"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[600px] h-[400px] bg-cyan-500/5 rounded-full filter blur-[150px] opacity-50"></div>
     </div>
 
     <!-- Header / Navbar -->
     <header class="fixed top-0 w-full z-50 glass transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 group">
-                <img src="assets/img/ico-claryum.svg" alt="Claryum Logo" class="w-8 h-8 transition-transform group-hover:scale-110">
+                <img src="assets/img/ico-claryum.svg" alt="Claryum Logo" width="32" height="32" class="w-8 h-8 transition-transform group-hover:scale-110">
                 <span class="font-heading font-bold text-xl tracking-tight">Claryum</span>
             </a>
 
@@ -160,32 +189,36 @@
 
             <div class="flex items-center gap-4">
                 <!-- Language Switcher -->
-                <div class="hidden md:flex items-center bg-dark-900/50 rounded-full p-1 border border-white/10">
+                <div class="hidden md:flex items-center bg-dark-900/60 rounded-full p-1 border border-white/10">
                     <a href="index.html" class="px-2.5 py-1 text-xs font-bold rounded-full text-gray-400 hover:text-white transition-all">PT</a>
-                    <a href="index-en.html" class="px-2.5 py-1 text-xs font-bold rounded-full bg-white/20 text-white shadow-sm transition-all">EN</a>
+                    <a href="index-en.html" class="px-2.5 py-1 text-xs font-bold rounded-full bg-white/20 text-white shadow-sm transition-all" aria-current="page">EN</a>
                 </div>
 
-                <a href="#contato" class="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-full bg-white text-dark-900 hover:bg-gray-100 hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <a href="#contato" class="hidden md:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-full bg-white text-dark-900 hover:bg-slate-200 transition-all border border-white/20">
                     Contact Us
                 </a>
-                <button class="md:hidden text-gray-300 hover:text-white" id="mobile-menu-btn" aria-label="Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button class="md:hidden text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-lg p-2 transition-colors" id="mobile-menu-btn" aria-label="Open main menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
         </div>
         
-        <div class="md:hidden hidden glass border-t border-white/5 absolute top-20 left-0 w-full" id="mobile-menu">
-            <div class="px-6 py-4 flex flex-col gap-4">
-                <a href="#servicos" class="text-gray-300 font-medium py-2">Services</a>
-                <a href="#pacotes" class="text-gray-300 font-medium py-2">Packages</a>
-                <a href="#portfolio" class="text-gray-300 font-medium py-2">Portfolio</a>
-                <a href="#processo" class="text-gray-300 font-medium py-2">Process</a>
-                <div class="flex items-center gap-4 py-2 border-t border-white/5 mt-2 pt-4">
-                    <span class="text-sm text-gray-400">Language:</span>
-                    <a href="index.html" class="text-sm font-bold text-gray-500 hover:text-white transition-colors">PT</a>
-                    <a href="index-en.html" class="text-sm font-bold text-white underline underline-offset-4">EN</a>
+        <!-- Mobile Navigation Menu Dropdown (Opaque solid dark surface to avoid bleed-through) -->
+        <div class="md:hidden hidden bg-[#0E131F] border-b border-white/10 absolute top-20 left-0 w-full shadow-2xl transition-all" id="mobile-menu">
+            <div class="px-6 py-6 flex flex-col gap-3">
+                <a href="#servicos" class="text-slate-200 font-medium py-2.5 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors">Services</a>
+                <a href="#pacotes" class="text-slate-200 font-medium py-2.5 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors">Packages</a>
+                <a href="#portfolio" class="text-slate-200 font-medium py-2.5 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors">Portfolio</a>
+                <a href="#processo" class="text-slate-200 font-medium py-2.5 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors">Process</a>
+                <div class="flex items-center justify-between py-3 px-3 border-t border-white/10 mt-1">
+                    <span class="text-sm text-slate-400 font-medium">Language:</span>
+                    <div class="flex items-center bg-dark-900 rounded-full p-1 border border-white/10">
+                        <a href="index.html" class="px-3 py-1 text-xs font-bold rounded-full text-gray-400 hover:text-white transition-colors">PT</a>
+                        <a href="index-en.html" class="px-3 py-1 text-xs font-bold rounded-full bg-white/20 text-white shadow-sm" aria-current="page">EN</a>
+                    </div>
                 </div>
-                <a href="#contato" class="inline-flex items-center justify-center px-5 py-3 text-sm font-medium rounded-lg bg-white text-dark-900 w-full mt-2">Contact Us</a>
+                <a href="#contato" class="inline-flex items-center justify-center px-5 py-3.5 text-sm font-semibold rounded-xl bg-white text-dark-900 w-full mt-2 hover:bg-slate-200 transition-colors shadow-lg">Contact Us</a>
             </div>
         </div>
     </header>
@@ -197,57 +230,107 @@
                 <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                     
                     <div class="max-w-2xl animate-fade-in-up">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
-                            <span class="w-2 h-2 rounded-full bg-neon-blue animate-pulse"></span>
-                            <span class="text-xs font-medium tracking-wide text-gray-300 uppercase">Strategic Intelligence</span>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-md mb-6">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                            <span class="text-xs font-semibold tracking-wider text-cyan-300 uppercase">Strategic Consulting & Corporate BI</span>
                         </div>
-                        <h1 class="text-5xl lg:text-7xl font-heading font-extrabold tracking-tight leading-[1.1] mb-6">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight leading-[1.12] mb-6">
                             Clarity for decisions that <span class="text-gradient">matter</span>.
                         </h1>
-                        <p class="text-lg text-gray-400 mb-8 leading-relaxed font-light max-w-lg">
-                            We transform corporate data into actionable strategies, driving your business to the next level of excellence and profitability.
+                        <p class="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed font-normal max-w-xl">
+                            We transform scattered corporate data into high-performance analytical architecture, data governance, and executive predictability for your business.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#contato" class="inline-flex justify-center items-center px-8 py-4 text-sm font-semibold rounded-full bg-gradient-to-r from-neon-blue to-neon-purple text-white hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] hover:scale-105 transition-all duration-300">
-                                Talk to an Expert
+                            <a href="#contato" class="inline-flex justify-center items-center px-7 py-3.5 text-sm font-semibold rounded-xl bg-white text-dark-900 hover:bg-slate-200 transition-all border border-white/20 shadow-lg shadow-black/40">
+                                Strategic Data Assessment
                             </a>
-                            <a href="#servicos" class="inline-flex justify-center items-center px-8 py-4 text-sm font-semibold rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-all duration-300">
-                                Our Solutions
+                            <a href="#servicos" class="inline-flex justify-center items-center px-7 py-3.5 text-sm font-semibold rounded-xl border border-white/15 bg-white/5 text-white hover:bg-white/10 transition-all">
+                                Explore Solutions
                             </a>
                         </div>
                     </div>
 
-                    <div class="relative lg:h-[600px] flex items-center justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
-                        <div class="relative z-20 w-full max-w-md glass-card rounded-2xl p-6 hover-lift border border-white/10">
-                            <div class="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
-                                <div>
-                                    <h3 class="font-heading font-semibold text-lg">Business Performance</h3>
-                                    <p class="text-xs text-gray-400">Updated now (Integrated BI)</p>
+                    <div class="relative lg:h-[580px] flex items-center justify-center animate-fade-in-up" style="animation-delay: 0.15s;">
+                        <!-- Executive BI Dashboard Card -->
+                        <div class="relative z-20 w-full max-w-md glass-card rounded-2xl p-6 hover-lift border border-white/10 shadow-2xl">
+                            <!-- Card Header -->
+                            <div class="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-heading font-semibold text-sm text-white">Claryum Executive Dashboard</h3>
+                                        <p class="text-[11px] text-gray-400">Consolidated Executive View · Real-Time</p>
+                                    </div>
                                 </div>
-                                <div class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium flex items-center gap-1">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-                                    Optimized
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-medium">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    Active & Validated
+                                </span>
+                            </div>
+
+                            <!-- Executive KPIs -->
+                            <div class="grid grid-cols-2 gap-3 mb-5">
+                                <div class="p-3.5 rounded-xl bg-dark-900/60 border border-white/5">
+                                    <div class="text-[11px] text-gray-400 mb-1 flex items-center justify-between">
+                                        <span>Predictability</span>
+                                        <span class="text-emerald-400 font-semibold">+18.4%</span>
+                                    </div>
+                                    <p class="text-xl font-heading font-bold text-white tracking-tight">$ 4.28M</p>
+                                    <p class="text-[10px] text-gray-400 mt-0.5">Pipeline with 99.2% accuracy</p>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-dark-900/60 border border-white/5">
+                                    <div class="text-[11px] text-gray-400 mb-1 flex items-center justify-between">
+                                        <span>Efficiency</span>
+                                        <span class="text-cyan-400 font-semibold">-72h/mo</span>
+                                    </div>
+                                    <p class="text-xl font-heading font-bold text-white tracking-tight">+34.8%</p>
+                                    <p class="text-[10px] text-gray-400 mt-0.5">Optimized manual routines</p>
                                 </div>
                             </div>
-                            
-                            <div class="h-40 flex items-end justify-between gap-2 mb-6">
-                                <div class="w-full bg-neon-purple/20 rounded-t-sm h-[30%] hover:bg-neon-purple/40 transition-colors"></div>
-                                <div class="w-full bg-neon-purple/20 rounded-t-sm h-[50%] hover:bg-neon-purple/40 transition-colors"></div>
-                                <div class="w-full bg-neon-purple/20 rounded-t-sm h-[40%] hover:bg-neon-purple/40 transition-colors"></div>
-                                <div class="w-full bg-neon-blue/40 rounded-t-sm h-[70%] relative group"></div>
-                                <div class="w-full bg-neon-blue/60 rounded-t-sm h-[85%] relative group"></div>
-                                <div class="w-full bg-neon-blue rounded-t-sm h-[100%] relative shadow-[0_0_15px_rgba(56,189,248,0.5)]"></div>
+
+                            <!-- Calibrated Metric Chart -->
+                            <div class="p-3.5 rounded-xl bg-dark-900/40 border border-white/5 mb-4">
+                                <div class="flex items-center justify-between text-[11px] text-gray-300 mb-3 font-medium">
+                                    <span>Operating Margin Progression</span>
+                                    <span class="text-[10px] font-mono text-cyan-400">YTD 2026</span>
+                                </div>
+                                
+                                <div class="relative h-28 w-full flex items-end justify-between gap-3 pt-2 pb-2 border-b border-white/5">
+                                    <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group cursor-default">
+                                        <span class="text-[9px] text-gray-400 group-hover:text-white transition-colors">18%</span>
+                                        <div class="w-full bg-slate-700/50 rounded-t h-[42%] group-hover:bg-slate-600 transition-colors"></div>
+                                        <span class="text-[10px] font-mono text-gray-400">Q1</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group cursor-default">
+                                        <span class="text-[9px] text-gray-400 group-hover:text-white transition-colors">24%</span>
+                                        <div class="w-full bg-slate-700/60 rounded-t h-[56%] group-hover:bg-slate-600 transition-colors"></div>
+                                        <span class="text-[10px] font-mono text-gray-400">Q2</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group cursor-default">
+                                        <span class="text-[9px] text-gray-400 group-hover:text-white transition-colors">31%</span>
+                                        <div class="w-full bg-cyan-600/40 rounded-t h-[74%] group-hover:bg-cyan-600/60 transition-colors"></div>
+                                        <span class="text-[10px] font-mono text-gray-400">Q3</span>
+                                    </div>
+                                    <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group cursor-default">
+                                        <span class="text-[9px] text-cyan-400 font-bold">42%</span>
+                                        <div class="w-full bg-cyan-400 rounded-t h-[96%] shadow-[0_0_12px_rgba(56,189,248,0.25)]"></div>
+                                        <span class="text-[10px] font-mono text-cyan-400 font-bold">Q4</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between pt-2 text-[10px] text-gray-400">
+                                    <span>Integration: Enterprise ERP & CRM</span>
+                                    <span class="flex items-center gap-1 text-emerald-400 font-medium">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                        Governance & Compliance
+                                    </span>
+                                </div>
                             </div>
-                            
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-dark-900/50 rounded-xl p-4 border border-white/5">
-                                    <p class="text-xs text-gray-400 mb-1">Processes</p>
-                                    <p class="text-xl font-heading font-bold text-white">Automated</p>
-                                </div>
-                                <div class="bg-dark-900/50 rounded-xl p-4 border border-white/5">
-                                    <p class="text-xs text-gray-400 mb-1">Decisions</p>
-                                    <p class="text-xl font-heading font-bold text-white">Data-Driven</p>
-                                </div>
+
+                            <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+                                <span>Pipeline Sync Status</span>
+                                <span class="text-white font-medium">100% Synchronized</span>
                             </div>
                         </div>
                     </div>
@@ -260,44 +343,47 @@
         <section id="servicos" class="py-24 relative">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4">Our <span class="text-white">Services.</span></h2>
-                    <p class="text-gray-400">We work in the most critical layers of your business to generate significant results.</p>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-3">
+                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Expertise & Architecture</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4 text-white">Our <span class="text-gradient">Services</span>.</h2>
+                    <p class="text-slate-400 text-base">We operate across the most critical operational layers of your business to drive sustainable profitability and predictability.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Serviço 1 -->
-                    <div class="glass-card rounded-3xl p-8 border border-white/5 hover:border-white/20 transition-colors group flex flex-col justify-between relative reveal">
-                        <div class="absolute right-0 top-0 w-48 h-48 bg-neon-blue/10 rounded-full blur-3xl group-hover:bg-neon-blue/20 transition-colors pointer-events-none"></div>
+                    <!-- Service 1 -->
+                    <div class="glass-card rounded-2xl p-8 border border-white/10 hover:border-cyan-400/40 transition-colors group flex flex-col justify-between relative reveal">
+                        <div class="absolute right-0 top-0 w-48 h-48 bg-cyan-500/5 rounded-full blur-3xl group-hover:bg-cyan-500/15 transition-colors pointer-events-none"></div>
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6 text-neon-blue group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-6 text-cyan-400 group-hover:scale-105 transition-transform">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             </div>
-                            <h3 class="text-xl font-heading font-bold mb-3">Strategic Consulting</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed">Deep analysis of your market to guide your company's next steps with safety and commercial predictability.</p>
+                            <h3 class="text-xl font-heading font-bold mb-3 text-white">Strategic Consulting</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Comprehensive diagnostic of business models, KPIs, and operational processes to guide executive decisions with security and commercial predictability.</p>
                         </div>
                     </div>
 
-                    <!-- Serviço 2 -->
-                    <div class="glass-card rounded-3xl p-8 border border-white/5 hover:border-white/20 transition-colors group flex flex-col justify-between relative reveal" style="transition-delay: 100ms;">
-                        <div class="absolute right-0 top-0 w-48 h-48 bg-neon-purple/10 rounded-full blur-3xl group-hover:bg-neon-purple/20 transition-colors pointer-events-none"></div>
+                    <!-- Service 2 -->
+                    <div class="glass-card rounded-2xl p-8 border border-white/10 hover:border-indigo-400/40 transition-colors group flex flex-col justify-between relative reveal" style="transition-delay: 80ms;">
+                        <div class="absolute right-0 top-0 w-48 h-48 bg-indigo-500/5 rounded-full blur-3xl group-hover:bg-indigo-500/15 transition-colors pointer-events-none"></div>
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6 text-neon-purple group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-6 text-indigo-400 group-hover:scale-105 transition-transform">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
-                            <h3 class="text-xl font-heading font-bold mb-3">Innovation & Technology</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed">Implementation of modern solutions to optimize internal processes, reduce operational costs, and increase overall team efficiency.</p>
+                            <h3 class="text-xl font-heading font-bold mb-3 text-white">Process Automation</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Implementation of automated workflows and modern architectures that streamline repetitive routines, eliminate human error, and accelerate turnaround.</p>
                         </div>
                     </div>
 
-                    <!-- Serviço 3 -->
-                    <div class="glass-card rounded-3xl p-8 border border-white/5 hover:border-white/20 transition-colors group flex flex-col justify-between relative reveal" style="transition-delay: 200ms;">
+                    <!-- Service 3 -->
+                    <div class="glass-card rounded-2xl p-8 border border-white/10 hover:border-white/30 transition-colors group flex flex-col justify-between relative reveal" style="transition-delay: 160ms;">
                         <div class="absolute right-0 top-0 w-48 h-48 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors pointer-events-none"></div>
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-105 transition-transform">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
                             </div>
-                            <h3 class="text-xl font-heading font-bold mb-3">Data Management (BI)</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed">Structuring and analysis of complex data with interactive dashboards. Facilitate fast decision-making based on corporate intelligence.</p>
+                            <h3 class="text-xl font-heading font-bold mb-3 text-white">Executive BI & Data Management</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Structuring unified data pipelines, analytical modeling, and real-time interactive dashboards tailored for C-Level control and board reporting.</p>
                         </div>
                     </div>
                 </div>
@@ -308,104 +394,119 @@
         <section id="pacotes" class="py-24 relative bg-dark-800/20">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4">Plans and <span class="text-gradient">Packages</span>.</h2>
-                    <p class="text-gray-400">Choose the ideal level of support for your company's current stage.</p>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-3">
+                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Engagement Models</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4 text-white">Plans & <span class="text-gradient">Packages</span>.</h2>
+                    <p class="text-slate-400 text-base">Select the ideal tier of analytical support and consulting depth for your business stage.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
                     
                     <!-- Essential -->
-                    <div class="glass-card rounded-3xl p-8 border border-white/5 flex flex-col hover-lift reveal">
-                        <h3 class="text-2xl font-heading font-bold mb-2">Essential</h3>
-                        <p class="text-sm text-gray-400 mb-6 h-10">Ideal para iniciar a jornada de dados com análises fundamentais.</p>
-                        <ul class="space-y-4 mb-8 flex-grow">
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Análise básica de dados
+                    <div class="glass-card rounded-2xl p-7 border border-white/10 flex flex-col hover-lift reveal">
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold text-cyan-300 uppercase tracking-wider">Foundation</span>
+                            <h3 class="text-2xl font-heading font-bold text-white mt-1">Essential</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed min-h-[36px]">Ideal for structuring initial analytical routines and standard executive reports.</p>
+                        </div>
+                        <ul class="space-y-3.5 mb-8 flex-grow border-t border-white/5 pt-5">
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Diagnostic data assessment</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Relatório gerencial mensal
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Monthly management report</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Suporte por email
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Technical email support</span>
                             </li>
                         </ul>
-                        <a href="#contato" class="w-full text-center py-3 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold">
-                            Falar com Consultor
+                        <a href="#contato" data-plan="Essential" class="btn-select-plan w-full text-center py-3.5 px-4 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold text-white">
+                            Select Essential
                         </a>
                     </div>
 
                     <!-- Plus -->
-                    <div class="glass-card rounded-3xl p-8 border border-white/5 flex flex-col hover-lift reveal" style="transition-delay: 100ms;">
-                        <h3 class="text-2xl font-heading font-bold mb-2 text-neon-purple">Plus</h3>
-                        <p class="text-sm text-gray-400 mb-6 h-10">Para empresas em crescimento que precisam de agilidade.</p>
-                        <ul class="space-y-4 mb-8 flex-grow">
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-purple shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Dashboards interativos
+                    <div class="glass-card rounded-2xl p-7 border border-white/10 flex flex-col hover-lift reveal" style="transition-delay: 80ms;">
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold text-indigo-300 uppercase tracking-wider">Growth</span>
+                            <h3 class="text-2xl font-heading font-bold text-white mt-1">Plus</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed min-h-[36px]">For scaling operations demanding rapid insights and weekly cadence.</p>
+                        </div>
+                        <ul class="space-y-3.5 mb-8 flex-grow border-t border-white/5 pt-5">
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Interactive BI dashboards</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-purple shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Atualização semanal de dados
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Weekly pipeline updates</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-purple shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Suporte prioritário
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Priority advisory support</span>
                             </li>
                         </ul>
-                        <a href="#contato" class="w-full text-center py-3 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold">
-                            Falar com Consultor
+                        <a href="#contato" data-plan="Plus" class="btn-select-plan w-full text-center py-3.5 px-4 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold text-white">
+                            Select Plus
                         </a>
                     </div>
 
                     <!-- Premium (Highlight) -->
-                    <div class="glass-card rounded-3xl p-8 border border-neon-blue relative flex flex-col hover-lift reveal transform md:-translate-y-4 shadow-[0_0_30px_rgba(56,189,248,0.15)]" style="transition-delay: 200ms;">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-neon-blue to-neon-purple text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                            Mais Popular
+                    <div class="glass-card rounded-2xl p-7 border border-cyan-400/60 relative flex flex-col hover-lift reveal transform md:-translate-y-3 shadow-xl bg-slate-900/90" style="transition-delay: 160ms;">
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-cyan-400 text-dark-900 text-[11px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                            Most Popular
                         </div>
-                        <h3 class="text-2xl font-heading font-bold mb-2 text-neon-blue">Premium</h3>
-                        <p class="text-sm text-gray-400 mb-6 h-10">Solução completa e avançada para operações complexas.</p>
-                        <ul class="space-y-4 mb-8 flex-grow">
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                BI em tempo real
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Advanced</span>
+                            <h3 class="text-2xl font-heading font-bold text-white mt-1">Premium</h3>
+                            <p class="text-xs text-slate-300 mt-2 leading-relaxed min-h-[36px]">Full real-time BI deployment and intelligent automation for complex ecosystems.</p>
+                        </div>
+                        <ul class="space-y-3.5 mb-8 flex-grow border-t border-white/10 pt-5">
+                            <li class="flex items-start gap-3 text-sm text-white font-medium">
+                                <svg class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Real-time corporate BI</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Automação de processos
+                            <li class="flex items-start gap-3 text-sm text-white font-medium">
+                                <svg class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Key workflow automation</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-neon-blue shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Consultor dedicado
+                            <li class="flex items-start gap-3 text-sm text-white font-medium">
+                                <svg class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Dedicated senior consultant</span>
                             </li>
                         </ul>
-                        <a href="#contato" class="w-full text-center py-3 px-4 rounded-xl bg-gradient-to-r from-neon-blue to-neon-purple text-white hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all text-sm font-semibold">
-                            Falar com Consultor
+                        <a href="#contato" data-plan="Premium" class="btn-select-plan w-full text-center py-3.5 px-4 rounded-xl bg-white text-dark-900 hover:bg-slate-200 transition-all text-sm font-bold shadow-md">
+                            Select Premium
                         </a>
                     </div>
 
                     <!-- Exclusive -->
-                    <div class="glass-card rounded-3xl p-8 border border-white/5 flex flex-col hover-lift reveal" style="transition-delay: 300ms;">
-                        <h3 class="text-2xl font-heading font-bold mb-2">Exclusive</h3>
-                        <p class="text-sm text-gray-400 mb-6 h-10">Totalmente adaptado à sua necessidade e regras de negócio.</p>
-                        <ul class="space-y-4 mb-8 flex-grow">
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-white shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Escopo 100% flexível
+                    <div class="glass-card rounded-2xl p-7 border border-white/10 flex flex-col hover-lift reveal" style="transition-delay: 240ms;">
+                        <div class="mb-4">
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Enterprise</span>
+                            <h3 class="text-2xl font-heading font-bold text-white mt-1">Exclusive</h3>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed min-h-[36px]">Custom-tailored architecture suited for proprietary enterprise business rules.</p>
+                        </div>
+                        <ul class="space-y-3.5 mb-8 flex-grow border-t border-white/5 pt-5">
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>100% flexible scope</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-white shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Desenvolvimento sob medida
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Dedicated data engineering</span>
                             </li>
-                            <li class="flex items-start gap-3 text-sm text-gray-300">
-                                <svg class="w-5 h-5 text-white shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                SLA personalizado
+                            <li class="flex items-start gap-3 text-sm text-slate-300">
+                                <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Executive SLA & governance</span>
                             </li>
                         </ul>
-                        <a href="#contato" class="w-full text-center py-3 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold">
-                            Falar com Consultor
+                        <a href="#contato" data-plan="Exclusive" class="btn-select-plan w-full text-center py-3.5 px-4 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition-colors text-sm font-semibold text-white">
+                            Inquire Scope
                         </a>
                     </div>
 
@@ -415,63 +516,81 @@
 
         <!-- Portfólio / Casos de Sucesso -->
         <section id="portfolio" class="py-24 relative overflow-hidden">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon-purple/5 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none"></div>
             <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
                     <div class="max-w-2xl">
-                        <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4">Success <span class="text-gradient">Cases</span>.</h2>
-                        <p class="text-gray-400">Our expertise applied in practice to generate massive results.</p>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-3">
+                            <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Proven Results</span>
+                        </div>
+                        <h2 class="text-3xl md:text-5xl font-heading font-bold mb-3 text-white">Success <span class="text-gradient">Cases</span>.</h2>
+                        <p class="text-slate-400 text-base">Methodology and data engineering applied to eliminate bottlenecks and accelerate corporate performance.</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
                     <!-- Case 1 -->
-                    <div class="glass-card p-8 rounded-2xl border border-white/5 reveal group hover:border-neon-blue transition-colors">
-                        <div class="w-12 h-12 rounded-xl bg-neon-blue/10 flex items-center justify-center text-neon-blue mb-6">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 reveal group hover:border-cyan-400/40 transition-colors">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            </div>
+                            <span class="text-[11px] font-mono font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-md">Retail & E-commerce</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Sales Optimization</h3>
-                        <p class="text-gray-400 leading-relaxed">Creation of an interactive dashboard that allowed the team to identify bottlenecks in real-time, resulting in a 25% increase in conversion rate in just 3 months.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Sales & Conversion Optimization</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">Deployment of analytical data pipelines and real-time dashboards unifying paid channels and CRM, driving a 25% increase in conversion rates in just 3 months.</p>
                     </div>
 
                     <!-- Case 2 -->
-                    <div class="glass-card p-8 rounded-2xl border border-white/5 reveal group hover:border-neon-purple transition-colors" style="transition-delay: 100ms;">
-                        <div class="w-12 h-12 rounded-xl bg-neon-purple/10 flex items-center justify-center text-neon-purple mb-6">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 reveal group hover:border-indigo-400/40 transition-colors" style="transition-delay: 80ms;">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <span class="text-[11px] font-mono font-semibold tracking-wider text-indigo-400 uppercase bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-md">Financial Services</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Financial Visibility</h3>
-                        <p class="text-gray-400 leading-relaxed">Structuring of complex financial data in a clear and objective dashboard, reducing the monthly closing time from 10 to just 2 days.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Financial Visibility & Reconciliation</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">Unification of complex transaction pipelines into an automated financial P&L dashboard, compressing the monthly closing cycle from 10 days to just 2 business days.</p>
                     </div>
 
                     <!-- Case 3 -->
-                    <div class="glass-card p-8 rounded-2xl border border-white/5 reveal group hover:border-white transition-colors">
-                        <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white mb-6">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 reveal group hover:border-white/30 transition-colors">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <span class="text-[11px] font-mono font-semibold tracking-wider text-slate-300 uppercase bg-white/10 border border-white/15 px-2.5 py-1 rounded-md">Industry & Logistics</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Operational Management</h3>
-                        <p class="text-gray-400 leading-relaxed">Implementation of an integrated management solution that improved operational efficiency by 30%, reducing costs and increasing team productivity.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Operational Efficiency & Value Chain</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">Integration of legacy ERP records with real-time fleet traceability, delivering a 30% surge in operational efficiency and significant idle-time reduction.</p>
                     </div>
 
                     <!-- Case 4 -->
-                    <div class="glass-card p-8 rounded-2xl border border-white/5 reveal group hover:border-green-400 transition-colors" style="transition-delay: 100ms;">
-                        <div class="w-12 h-12 rounded-xl bg-green-400/10 flex items-center justify-center text-green-400 mb-6">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 reveal group hover:border-emerald-400/40 transition-colors" style="transition-delay: 80ms;">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <span class="text-[11px] font-mono font-semibold tracking-wider text-emerald-400 uppercase bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-md">B2B Services</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Process Automation</h3>
-                        <p class="text-gray-400 leading-relaxed">Implementation of smart automated workflows that reduced processing time by 50% and drastically mitigated human errors and rework.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Intelligent Routine Automation</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">Implementation of automated workflows with custom business rules, cutting document turnaround by 50% and completely eliminating rework.</p>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- Process / How it Works (Keep as requested as it adds value) -->
+        <!-- Process / How it Works -->
         <section id="processo" class="py-24 bg-dark-800/20 relative border-y border-white/5">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4"><span class="text-white">Claryum</span> Methodology.</h2>
-                    <p class="text-gray-400">Agile, transparent process oriented towards high-value deliverables from day zero.</p>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-3">
+                        <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Methodology</span>
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-4"><span class="text-white">Claryum</span> Framework.</h2>
+                    <p class="text-slate-400 text-base">Agile, transparent, and outcome-driven process providing executive value from day zero.</p>
                 </div>
 
                 <div class="relative">
@@ -479,27 +598,27 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                         <div class="glass-card p-6 rounded-2xl border border-white/5 relative group reveal">
-                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-neon-blue flex items-center justify-center text-neon-blue font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2">1</div>
+                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-cyan-400 flex items-center justify-center text-cyan-400 font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2">1</div>
                             <h3 class="text-lg font-bold mb-2 mt-4 md:text-center md:mt-8">Discovery</h3>
-                            <p class="text-sm text-gray-400 md:text-center">Deep mapping of the business model and identification of data bottlenecks.</p>
+                            <p class="text-sm text-slate-400 md:text-center">In-depth mapping of the business model, data silos, and executive KPI requirements.</p>
                         </div>
                         
                         <div class="glass-card p-6 rounded-2xl border border-white/5 relative group reveal" style="transition-delay: 100ms;">
-                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-white/20 flex items-center justify-center text-white font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2 group-hover:border-neon-blue group-hover:text-neon-blue transition-colors">2</div>
+                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-white/20 flex items-center justify-center text-white font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2 group-hover:border-cyan-400 group-hover:text-cyan-400 transition-colors">2</div>
                             <h3 class="text-lg font-bold mb-2 mt-4 md:text-center md:mt-8">Architecture</h3>
-                            <p class="text-sm text-gray-400 md:text-center">Technical design of the BI solution, data structuring and technological definition.</p>
+                            <p class="text-sm text-slate-400 md:text-center">Technical blueprint for BI models, pipeline ingestion, and security governance.</p>
                         </div>
 
                         <div class="glass-card p-6 rounded-2xl border border-white/5 relative group reveal" style="transition-delay: 200ms;">
-                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-white/20 flex items-center justify-center text-white font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2 group-hover:border-neon-purple group-hover:text-neon-purple transition-colors">3</div>
+                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-white/20 flex items-center justify-center text-white font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2 group-hover:border-indigo-400 group-hover:text-indigo-400 transition-colors">3</div>
                             <h3 class="text-lg font-bold mb-2 mt-4 md:text-center md:mt-8">Implementation</h3>
-                            <p class="text-sm text-gray-400 md:text-center">Agile development with constant validations of dashboards and automations.</p>
+                            <p class="text-sm text-slate-400 md:text-center">Agile sprints with continuous stakeholder validation of dashboards and automations.</p>
                         </div>
 
                         <div class="glass-card p-6 rounded-2xl border border-white/5 relative group reveal" style="transition-delay: 300ms;">
-                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-white/20 flex items-center justify-center text-white font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2 group-hover:border-green-400 group-hover:text-green-400 transition-colors">4</div>
+                            <div class="w-10 h-10 rounded-full bg-dark-900 border border-white/20 flex items-center justify-center text-white font-bold mb-4 md:absolute md:-top-5 md:left-1/2 md:-translate-x-1/2 group-hover:border-emerald-400 group-hover:text-emerald-400 transition-colors">4</div>
                             <h3 class="text-lg font-bold mb-2 mt-4 md:text-center md:mt-8">Growth</h3>
-                            <p class="text-sm text-gray-400 md:text-center">Final delivery, continuous monitoring of results and operational training.</p>
+                            <p class="text-sm text-slate-400 md:text-center">Production handover, executive enablement, and ongoing performance calibration.</p>
                         </div>
                     </div>
                 </div>
@@ -509,12 +628,15 @@
         <!-- Contact Form (Netlify Ready) -->
         <section id="contato" class="py-24 relative">
             <div class="max-w-4xl mx-auto px-6 lg:px-8">
-                <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10 relative overflow-hidden reveal">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-bl-full blur-3xl pointer-events-none"></div>
+                <div class="glass-card rounded-2xl p-8 md:p-12 border border-white/10 relative overflow-hidden reveal shadow-2xl">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-bl-full blur-3xl pointer-events-none"></div>
                     
                     <div class="text-center mb-10 relative z-10">
-                        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Ready to <span class="text-gradient">innovate?</span></h2>
-                        <p class="text-gray-400">Fill out the form below and one of our experts will contact you.</p>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-3">
+                            <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Executive Advisory</span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3 text-white">Start your assessment with <span class="text-gradient">Claryum</span></h2>
+                        <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">Receive a preliminary data architecture review and strategic feasibility evaluation with no commitment.</p>
                     </div>
 
                     <!-- Netlify Form -->
@@ -526,33 +648,88 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-2">
-                                <label for="name" class="text-sm font-medium text-gray-300">Full Name</label>
-                                <input type="text" id="name" name="nome" required class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-colors placeholder-gray-600" placeholder="Your name">
+                                <label for="name" class="text-sm font-medium text-slate-300 flex items-center justify-between">
+                                    <span>Full Name</span>
+                                    <span class="text-[11px] text-slate-500">Required</span>
+                                </label>
+                                <input type="text" id="name" name="nome" required class="w-full bg-dark-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors placeholder-slate-500 text-sm" placeholder="e.g. Robert Henderson">
                             </div>
                             <div class="space-y-2">
-                                <label for="email" class="text-sm font-medium text-gray-300">Corporate Email</label>
-                                <input type="email" id="email" name="email" required class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-colors placeholder-gray-600" placeholder="your@email.com">
+                                <label for="email" class="text-sm font-medium text-slate-300 flex items-center justify-between">
+                                    <span>Corporate Email</span>
+                                    <span class="text-[11px] text-slate-500">Required</span>
+                                </label>
+                                <input type="email" id="email" name="email" required class="w-full bg-dark-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors placeholder-slate-500 text-sm" placeholder="robert@enterprise.com">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="phone" class="text-sm font-medium text-slate-300 flex items-center justify-between">
+                                    <span>Phone / WhatsApp</span>
+                                    <span class="text-[11px] text-slate-500">With area code</span>
+                                </label>
+                                <input type="tel" id="phone" name="telefone" minlength="10" maxlength="20" class="w-full bg-dark-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors placeholder-slate-500 text-sm" placeholder="+1 (555) 000-0000">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="plan-select" class="text-sm font-medium text-slate-300">
+                                    Plan or Primary Interest
+                                </label>
+                                <select id="plan-select" name="plano" class="w-full bg-dark-900/80 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors text-sm">
+                                    <option value="General Assessment">General Executive Assessment</option>
+                                    <option value="Premium">Premium Plan (Real-Time BI & Automation)</option>
+                                    <option value="Plus">Plus Plan (Dashboards & Weekly Cadence)</option>
+                                    <option value="Essential">Essential Plan (Monthly Executive Report)</option>
+                                    <option value="Exclusive">Exclusive Plan (Custom Enterprise Architecture)</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="space-y-2">
-                            <label for="phone" class="text-sm font-medium text-gray-300">WhatsApp / Phone</label>
-                            <input type="tel" id="phone" name="telefone" class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-colors placeholder-gray-600" placeholder="(00) 00000-0000">
+                            <label for="message" class="text-sm font-medium text-slate-300 flex items-center justify-between">
+                                <span>Message or Current Challenge</span>
+                                <span class="text-[11px] text-slate-500">Brief context</span>
+                            </label>
+                            <textarea id="message" name="mensagem" rows="4" required class="w-full bg-dark-900/60 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors placeholder-slate-500 resize-none text-sm leading-relaxed" placeholder="Briefly describe your data silos, current tooling stack, or strategic milestones..."></textarea>
                         </div>
 
-                        <div class="space-y-2">
-                            <label for="message" class="text-sm font-medium text-gray-300">Message</label>
-                            <textarea id="message" name="mensagem" rows="4" required class="w-full bg-dark-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue transition-colors placeholder-gray-600 resize-none" placeholder="Tell us about your needs..."></textarea>
-                        </div>
-
-                        <button type="submit" id="submit-btn" class="w-full bg-white text-dark-900 font-bold py-4 rounded-xl hover:bg-gray-200 transition-colors flex justify-center items-center gap-2 group">
-                            <span class="btn-text">Send Request</span>
+                        <button type="submit" id="submit-btn" class="w-full bg-white text-dark-900 font-bold py-4 rounded-xl hover:bg-slate-200 transition-colors flex justify-center items-center gap-2 group shadow-lg">
+                            <span class="btn-text">Request Executive Consultation</span>
                             <svg class="w-5 h-5 btn-text group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             <div class="spinner"></div>
                         </button>
                         
-                        <div id="form-success" class="hidden mt-4 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-center text-sm">
-                            Your message was sent successfully! We will contact you shortly.
+                        <!-- Trust Reassurance Micro-Copy -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs text-slate-400 pt-2 text-center">
+                            <span class="flex items-center gap-1.5 text-slate-300">
+                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                Non-Disclosure Agreement (NDA) & Privacy Assured
+                            </span>
+                            <span class="hidden sm:inline text-slate-600">•</span>
+                            <span class="flex items-center gap-1.5 text-slate-300">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Executive response within 24 business hours
+                            </span>
+                        </div>
+
+                        <!-- Accessible Success Alert -->
+                        <div id="form-success" role="status" aria-live="polite" class="hidden p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-center text-sm">
+                            <div class="flex items-center justify-center gap-2 font-semibold text-emerald-400 mb-1">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Request successfully submitted!
+                            </div>
+                            <p class="text-xs text-slate-300">Our executive consulting team will reach out within 24 business hours to coordinate your strategic assessment.</p>
+                            <button type="button" id="btn-reset-form" class="mt-3 text-xs underline text-emerald-400 hover:text-white transition-colors">Submit another inquiry</button>
+                        </div>
+
+                        <!-- Accessible Error Alert -->
+                        <div id="form-error" role="alert" aria-live="assertive" class="hidden p-5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-center text-sm">
+                            <div class="flex items-center justify-center gap-2 font-semibold text-rose-400 mb-1">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                A problem occurred while sending your message.
+                            </div>
+                            <p class="text-xs text-slate-300 mb-2">Please verify your details or email us directly at <a href="mailto:contato@claryum.com.br" class="underline text-white font-medium">contato@claryum.com.br</a>.</p>
+                            <button type="button" id="btn-retry-form" class="text-xs px-3 py-1 rounded bg-rose-500/20 text-white hover:bg-rose-500/30 transition-colors">Try again</button>
                         </div>
                     </form>
                 </div>
@@ -562,63 +739,120 @@
 
     <!-- Footer -->
     <footer class="border-t border-white/10 bg-dark-900 pt-16 pb-8 relative overflow-hidden">
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-32 bg-neon-blue/20 blur-[100px] rounded-t-full pointer-events-none"></div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-32 bg-cyan-500/10 blur-[120px] rounded-t-full pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="md:col-span-2">
                     <a href="#" class="flex items-center gap-2 mb-4">
-                        <img src="assets/img/ico-claryum.svg" alt="Claryum Logo" class="w-8 h-8">
-                        <span class="font-heading font-bold text-xl tracking-tight">Claryum</span>
+                        <img src="assets/img/ico-claryum.svg" alt="Claryum Logo" width="32" height="32" class="w-8 h-8">
+                        <span class="font-heading font-bold text-xl tracking-tight text-white">Claryum</span>
                     </a>
-                    <p class="text-gray-400 text-sm max-w-sm mb-6">We help leaders and managers achieve success through corporate intelligence, data analysis and interactive dashboards.</p>
+                    <p class="text-slate-400 text-sm max-w-sm mb-6 leading-relaxed">Guiding organizations to their next operational tier through strategic consulting, advanced Business Intelligence, and decision-driven data engineering.</p>
+                    <div class="flex items-center gap-4 text-slate-400 text-xs">
+                        <span class="flex items-center gap-1.5 text-emerald-400">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            Data Compliance & Active Governance
+                        </span>
+                    </div>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Useful Links</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#servicos" class="hover:text-neon-blue transition-colors">Services</a></li>
-                        <li><a href="#pacotes" class="hover:text-neon-blue transition-colors">Packages and Plans</a></li>
-                        <li><a href="#portfolio" class="hover:text-neon-blue transition-colors">Success Cases</a></li>
-                        <li><a href="#processo" class="hover:text-neon-blue transition-colors">Our Methodology</a></li>
+                    <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wider">Navigation</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#servicos" class="hover:text-cyan-400 transition-colors">Specialized Services</a></li>
+                        <li><a href="#pacotes" class="hover:text-cyan-400 transition-colors">Plans & Engagement Models</a></li>
+                        <li><a href="#portfolio" class="hover:text-cyan-400 transition-colors">Case Studies</a></li>
+                        <li><a href="#processo" class="hover:text-cyan-400 transition-colors">4-Stage Methodology</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>contato@claryum.com.br</li>
-                        <li>+55 11 97813-8894</li>
+                    <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wider">Contact & Headquarters</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li>
+                            <a href="mailto:contato@claryum.com.br" class="hover:text-cyan-400 transition-colors flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                contato@claryum.com.br
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+5511978138894" class="hover:text-cyan-400 transition-colors flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                +55 11 97813-8894
+                            </a>
+                        </li>
+                        <li class="pt-1">
+                            <a href="https://www.linkedin.com/company/claryum" target="_blank" rel="noopener noreferrer" aria-label="Claryum Institutional LinkedIn (opens in a new tab)" class="hover:text-cyan-400 transition-colors inline-flex items-center gap-1.5 text-xs text-slate-400">
+                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                                Institutional LinkedIn
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-                <p>&copy; 2026 Claryum. All rights reserved.</p>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <div>
+                    <p>&copy; 2026 Claryum Strategic Consulting. All rights reserved.</p>
+                    <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        São Paulo, SP · Brazil
+                    </p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#contato" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+                    <a href="#contato" class="hover:text-slate-400 transition-colors">Privacy Policy & Governance</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts (Vanilla JS) -->
     <script>
-        // 1. Header Blur on Scroll
+        // 1. Header Elevation on Scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
-                navbar.classList.add('shadow-lg', 'border-b', 'border-white/5');
+                navbar.classList.add('shadow-xl', 'border-b', 'border-white/10');
             } else {
-                navbar.classList.remove('shadow-lg', 'border-b', 'border-white/5');
+                navbar.classList.remove('shadow-xl', 'border-b', 'border-white/10');
             }
-        });
+        }, { passive: true });
 
-        // 2. Mobile Menu Toggle
+        // 2. Mobile Menu Toggle with ARIA, icon swap, and Escape listener
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        if (menuBtn && mobileMenu) {
+            const toggleMenu = (isOpen) => {
+                const open = typeof isOpen === 'boolean' ? isOpen : mobileMenu.classList.contains('hidden');
+                if (open) {
+                    mobileMenu.classList.remove('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'true');
+                    menuBtn.setAttribute('aria-label', 'Close main menu');
+                    if (iconOpen) iconOpen.classList.add('hidden');
+                    if (iconClose) iconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                    menuBtn.setAttribute('aria-label', 'Open main menu');
+                    if (iconOpen) iconOpen.classList.remove('hidden');
+                    if (iconClose) iconClose.classList.add('hidden');
+                }
+            };
+
+            menuBtn.addEventListener('click', () => toggleMenu());
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => toggleMenu(false));
             });
-        });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    toggleMenu(false);
+                    menuBtn.focus();
+                }
+            });
+        }
 
         // 3. Scroll Reveal Animation
         const revealElements = document.querySelectorAll('.reveal');
@@ -631,48 +865,45 @@
             });
         }, {
             root: null,
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
+            threshold: 0.08,
+            rootMargin: "0px 0px -40px 0px"
         });
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // 4. Number Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200; 
-
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const updateCount = () => {
-                        const target = +counter.getAttribute('data-target');
-                        const count = +counter.innerText;
-                        const inc = target / speed;
-
-                        if (count < target) {
-                            counter.innerText = Math.ceil(count + inc);
-                            setTimeout(updateCount, 15);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCount();
-                    observer.unobserve(counter);
+        // 4. Plan Selection Connects to Form with Smooth Auto-focus
+        document.querySelectorAll('.btn-select-plan').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const plan = btn.getAttribute('data-plan');
+                const planSelect = document.getElementById('plan-select');
+                const messageBox = document.getElementById('message');
+                const nameInput = document.getElementById('name');
+                if (planSelect && plan) {
+                    planSelect.value = plan;
+                }
+                if (messageBox && (!messageBox.value || messageBox.value.startsWith('Hello! I would like'))) {
+                    messageBox.value = `Hello! I would like to schedule an executive meeting to understand the scope and applicability of the ${plan} package for our business.`;
+                }
+                if (nameInput) {
+                    setTimeout(() => nameInput.focus(), 350);
                 }
             });
-        }, { threshold: 0.5 });
-        counters.forEach(counter => counterObserver.observe(counter));
+        });
 
-        // 5. Netlify Form Handling
+        // 5. Accessible Netlify Form Handling (No alert())
         const form = document.getElementById('contact-form');
         const submitBtn = document.getElementById('submit-btn');
         const successMsg = document.getElementById('form-success');
+        const errorMsg = document.getElementById('form-error');
+        const btnReset = document.getElementById('btn-reset-form');
+        const btnRetry = document.getElementById('btn-retry-form');
 
-        if(form) {
+        if (form && submitBtn) {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 submitBtn.classList.add('btn-loading');
                 submitBtn.disabled = true;
+                if (successMsg) successMsg.classList.add('hidden');
+                if (errorMsg) errorMsg.classList.add('hidden');
 
                 const formData = new FormData(form);
                 
@@ -681,65 +912,85 @@
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams(formData).toString()
                 })
-                .then(() => {
+                .then((response) => {
                     submitBtn.classList.remove('btn-loading');
-                    form.reset();
-                    successMsg.classList.remove('hidden');
-                    setTimeout(() => {
-                        successMsg.classList.add('hidden');
+                    // On Netlify, successful POST returns 200 or 302
+                    if (response.ok || response.status === 200) {
+                        form.reset();
+                        if (successMsg) {
+                            successMsg.classList.remove('hidden');
+                            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    } else {
+                        if (errorMsg) errorMsg.classList.remove('hidden');
                         submitBtn.disabled = false;
-                    }, 5000);
+                    }
                 })
                 .catch(() => {
-                    alert('Error sending message. Please try again.');
                     submitBtn.classList.remove('btn-loading');
+                    if (errorMsg) {
+                        errorMsg.classList.remove('hidden');
+                        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
                     submitBtn.disabled = false;
                 });
             });
+
+            if (btnReset) {
+                btnReset.addEventListener('click', () => {
+                    if (successMsg) successMsg.classList.add('hidden');
+                    submitBtn.disabled = false;
+                    form.reset();
+                });
+            }
+            if (btnRetry) {
+                btnRetry.addEventListener('click', () => {
+                    if (errorMsg) errorMsg.classList.add('hidden');
+                    submitBtn.disabled = false;
+                });
+            }
         }
     </script>
 
     <!-- Cookie Consent Banner -->
     <div id="cookie-banner" class="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 translate-y-full transition-transform duration-500 ease-out">
-        <div class="max-w-4xl mx-auto glass-card rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div class="max-w-4xl mx-auto glass-card rounded-2xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 shadow-2xl">
             <div class="flex items-start gap-4">
-                <div class="p-2.5 bg-neon-blue/10 rounded-xl text-neon-blue shrink-0 hidden md:block">
+                <div class="p-2.5 bg-cyan-500/10 rounded-xl text-cyan-400 shrink-0 hidden md:block border border-cyan-500/20">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
                 </div>
                 <div>
-                    <h4 class="font-bold text-white mb-1.5 text-lg">We value your privacy</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">We use cookies to enhance your experience on our site. Although we don't collect sensitive data, we ask for your consent to proceed in accordance with data protection laws.</p>
+                    <h4 class="font-bold text-white mb-1 text-base">Transparency & Data Governance</h4>
+                    <p class="text-xs md:text-sm text-slate-400 leading-relaxed">We use operational cookies to optimize navigation and security across our institutional portal, strictly aligned with privacy regulations and enterprise standards. <a href="#contato" class="text-cyan-400 hover:underline">Learn more</a>.</p>
                 </div>
             </div>
             <div class="flex items-center gap-3 w-full md:w-auto shrink-0">
-                <button id="cookie-reject" class="flex-1 md:flex-none px-6 py-2.5 text-sm font-medium rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors">Reject</button>
-                <button id="cookie-accept" class="flex-1 md:flex-none px-6 py-2.5 text-sm font-medium rounded-xl bg-neon-blue text-dark-900 hover:bg-neon-blue/90 shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all">Accept All</button>
+                <button id="cookie-reject" class="flex-1 md:flex-none px-5 py-2.5 text-xs md:text-sm font-medium rounded-xl border border-white/15 bg-white/5 text-slate-300 hover:bg-white/10 transition-colors">Essential Only</button>
+                <button id="cookie-accept" class="flex-1 md:flex-none px-5 py-2.5 text-xs md:text-sm font-semibold rounded-xl bg-white text-dark-900 hover:bg-slate-200 transition-all border border-white/20">Accept All</button>
             </div>
         </div>
     </div>
 
-    <!-- Interactive Scripts (Cookies & Lang) -->
+    <!-- Interactive Scripts (Cookies) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Cookie Banner Logic ---
             const cookieBanner = document.getElementById('cookie-banner');
             const btnAccept = document.getElementById('cookie-accept');
             const btnReject = document.getElementById('cookie-reject');
 
-            if (!localStorage.getItem('cookieConsent')) {
-                // Show banner after a short delay
+            if (cookieBanner && !localStorage.getItem('cookieConsent')) {
                 setTimeout(() => {
                     cookieBanner.classList.remove('translate-y-full');
-                }, 1500);
+                }, 1200);
             }
 
             const hideBanner = (consentValue) => {
                 localStorage.setItem('cookieConsent', consentValue);
-                cookieBanner.classList.add('translate-y-full');
+                if (cookieBanner) cookieBanner.classList.add('translate-y-full');
             };
 
-            btnAccept.addEventListener('click', () => hideBanner('accepted'));
-            btnReject.addEventListener('click', () => hideBanner('rejected'));
+            if (btnAccept) btnAccept.addEventListener('click', () => hideBanner('accepted'));
+            if (btnReject) btnReject.addEventListener('click', () => hideBanner('rejected'));
         });
     </script>
 </body>
